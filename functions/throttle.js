@@ -14,7 +14,28 @@
  * @param {number} wait - The throttle delay in milliseconds (default: 0)
  * @returns {Function} - The throttled function
  */
-export default function throttle(func, wait = 0) {
+
+export default function throttleV1(func, wait = 0) {
+
+const shouldThrottle = false
+
+  function throttled(...args) {
+    if(shouldThrottle){
+      return
+    }
+     shouldThrottle = true;
+     setTimeout(()=>{
+      shouldThrottle = false;
+    },wait)
+     func.apply(this, args);
+}
+
+ return throttled
+
+}
+
+
+export default function throttleV2(func, wait = 0) {
   // Hint: Use a flag to track if function should be throttled
   
   let shouldThrottle = false;
